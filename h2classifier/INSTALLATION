@@ -1,0 +1,15 @@
+# Install
+
+Requirements : virtualenv, python3
+
+Put all the source in the same folder with the data (data_ggimg.json and data_ggimg.json)
+In the same folder run the following lines :
+
+$ virtualenv -p python3 env_local
+$ source ./env_local/bin/activate
+$ pip install -r requirements.txt
+
+
+# Run
+
+(env_local) $ ./expe.py ./data_gg.json ./data_gg_noise.json

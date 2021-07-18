@@ -1,0 +1,80 @@
+digraph G {
+
+    rankdir = "LR";
+
+    subgraph cluster_0 {
+
+        label = "CPU Primary";
+
+    	"node0" [
+            label = "<f0> Containers | <f01> Load-Balancer | <f02> Services | <f1> kube-apiserver | <f2> kube-proxy | <f3> CoreDNS"
+            shape = "record"
+        ];
+
+    	"node0a" [
+            label = "<f0> System resources | <f1> CNI | <f2> etcd | <f3> base-OS"
+            shape = "record"
+        ];
+
+        "node0":<f0> -> "node0a":<f1>;
+    }
+
+    subgraph cluster_1 {
+
+        label = "CPU Secondary";
+
+    	"node1" [
+            label = "<f0> Containers | <f1> kube-proxy"
+            shape = "record"
+        ];
+
+    	"node1a" [
+            label = "<f0> System resources | <f1> CNI | <f2> etcd | <f3> base-OS"
+            shape = "record"
+        ];
+
+        "node1":<f0> -> "node1a":<f1>;
+
+    }
+
+    subgraph cluster_3 {
+
+        label = "GPU Instance";
+
+    	"node3" [
+            label = "GPU NFV | <f1> Vulkan | <f0> kube-rs"
+            shape = "record"
+        ];
+
+    	"node3a" [
+            label = "<f0> System resources | <f1> CNI | <f2> etcd | <f3> base-OS"
+            shape = "record"
+        ];
+
+        "node3":<f0> -> "node3a":<f1>;
+    }
+
+    subgraph cluster_2 {
+
+        label = "CPU Secondary";
+
+    	"node2" [
+            label = "<f0> Containers | <f1> kube-proxy"
+            shape = "record"
+        ];
+
+    	"node2a" [
+            label = "<f0> System resources | <f1> CNI | <f2> etcd | <f3> base-OS"
+            shape = "record"
+        ];
+
+        "node2":<f0> -> "node2a":<f1>;
+
+    }
+
+    "node0a":<f1> -> "node0":<f3>;
+    "node1a":<f1> -> "node0":<f3>;
+    "node2a":<f1> -> "node0":<f3>;
+    "node3a":<f1> -> "node0":<f3>;
+
+}

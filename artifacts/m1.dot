@@ -1,0 +1,61 @@
+digraph G {
+
+
+    subgraph cluster_0 {
+
+        label = "Apple M1";
+
+	"GPU" [
+        shape = "record"
+    ];
+
+    "GPU" -> "node1":<f0>;
+
+	"node1" [
+        label = "<f0> Queue Families| <f1> 1 | <f2> 2 | <f3> 3 | <f4> 4"
+        shape = "record"
+    ];
+
+	"node1a" [
+        label = "<f0> Queues| <f1> [1] | <f2> [1] | <f3> [1] | <f4> [1]"
+        shape = "record"
+    ];
+
+	"node2a" [
+        label = "<f0> Fences| <f1> [1] | <f2> [1] | <f3> [1] | <f4> [1]"
+        shape = "record"
+    ];
+
+
+    "node1":<f1> -> "node1a":<f1>;
+    "node1":<f2> -> "node1a":<f2>;
+    "node1":<f3> -> "node1a":<f3>;
+    "node1":<f4> -> "node1a":<f4>;
+
+    "node1a":<f1> -> "node2a":<f1>;
+    "node1a":<f2> -> "node2a":<f2>;
+    "node1a":<f3> -> "node2a":<f3>;
+    "node1a":<f4> -> "node2a":<f4>;
+
+    CPU;
+
+    "node2a":<f1> -> CPU
+    "node2a":<f2> -> CPU
+    "node2a":<f3> -> CPU
+    "node2a":<f4> -> CPU
+
+    "cb" [
+        label = "<f0> Command Buffers"
+        shape = "record"
+    ];
+
+    "cb" -> "node1a":<f0>;
+
+    CPU -> "cb";
+
+
+
+    }
+
+
+}
