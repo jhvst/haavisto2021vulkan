@@ -1,0 +1,3 @@
+[submodule "rivi-loader"]
+	path = rivi-loader
+	url = https://github.com/periferia-labs/rivi-loader
